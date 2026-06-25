@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>このサイトについて | Lexicon Garden</title>
+  <meta name="description" content="Lexicon Gardenについて。言語学ファンサイトの管理人と、サイトのご案内。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1A3D28;
+      --jungle:  #22573A;
+      --vine:    #2D7A4F;
+      --leaf:    #4CAF72;
+      --mist:    #EFF7EC;
+      --banana:  #F7B731;
+      --orchid:  #E84393;
+      --bark:    #0F2619;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: var(--banana); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orchid); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bark);
+      border-bottom: 4px solid var(--banana);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--banana);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--orchid); }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--banana); }
+    nav ul a.active { color: var(--banana); border-bottom: 2px solid var(--banana); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--jungle);
+      border-bottom: 5px solid var(--banana);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .page-header-inner { max-width: 720px; margin: 0 auto; }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--banana);
+      text-shadow: 2px 3px 0 var(--bark);
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { font-size: 0.95rem; opacity: 0.8; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── SECTION LABEL (参考サイトスタイル) ── */
+    .section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      color: var(--leaf);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--vine), transparent);
+    }
+
+    /* ── CARD (参考サイトの form-card 風) ── */
+    .card {
+      background: linear-gradient(135deg, rgba(34,87,58,0.55), rgba(15,38,25,0.45));
+      border: 1px solid rgba(247,183,49,0.22);
+      border-radius: 4px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--banana), transparent);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .card p { font-size: 0.95rem; opacity: 0.88; margin-bottom: 0.6rem; }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* ── LINK GRID (参考サイトと同じ構造) ── */
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.875rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      background: linear-gradient(135deg, rgba(34,87,58,0.55), rgba(15,38,25,0.45));
+      border: 1px solid rgba(247,183,49,0.2);
+      border-radius: 4px;
+      padding: 1rem 1.1rem;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--banana), transparent);
+      border-radius: 4px 0 0 4px;
+    }
+    .link-card:hover {
+      border-color: rgba(247,183,49,0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 10px rgba(247,183,49,0.08);
+    }
+
+    .link-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(247,183,49,0.08);
+      border: 1px solid rgba(247,183,49,0.18);
+      border-radius: 3px;
+    }
+
+    .link-text { flex: 1; min-width: 0; }
+    .link-name {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--banana);
+      margin-bottom: 0.2rem;
+    }
+    .link-desc {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--leaf);
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .link-arrow {
+      font-size: 1.1rem;
+      color: rgba(247,183,49,0.35);
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .link-card:hover .link-arrow { color: var(--banana); transform: translateX(3px); }
+
+    /* ── CONTACT FORM ── */
+    .form-intro {
+      font-size: 0.9rem;
+      color: var(--mist);
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .form-group { margin-bottom: 1.1rem; }
+
+    .form-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--leaf);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+    .required { color: var(--orchid); }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: rgba(10,20,14,0.7);
+      border: 1px solid rgba(247,183,49,0.22);
+      border-radius: 3px;
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: rgba(239,247,236,0.25); }
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: rgba(247,183,49,0.6);
+      box-shadow: 0 0 10px rgba(247,183,49,0.1);
+    }
+    .form-textarea { resize: vertical; min-height: 130px; }
+
+    .field-error { display: block; font-size: 0.72rem; color: var(--orchid); margin-top: 0.3rem; }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, rgba(45,122,79,0.8), rgba(34,87,58,0.9));
+      border: 1px solid rgba(247,183,49,0.45);
+      border-radius: 3px;
+      color: var(--banana);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.65rem 1.75rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover {
+      background: linear-gradient(135deg, rgba(76,175,114,0.8), rgba(45,122,79,0.9));
+      border-color: var(--banana);
+      box-shadow: 0 0 14px rgba(247,183,49,0.2);
+    }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-success {
+      background: rgba(34,87,58,0.6);
+      border: 1px solid rgba(247,183,49,0.4);
+      border-radius: 3px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      color: var(--banana);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .form-success-icon { display: block; font-size: 1.25rem; margin-bottom: 0.4rem; }
+    .form-error-global {
+      background: rgba(232,67,147,0.1);
+      border: 1px solid rgba(232,67,147,0.35);
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      color: var(--orchid);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── BACK LINK ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--leaf);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(247,183,49,0.2);
+      border-radius: 3px;
+      transition: all 0.2s;
+      letter-spacing: 0.04em;
+    }
+    .back-link:hover {
+      color: var(--banana);
+      border-color: rgba(247,183,49,0.5);
+      background: rgba(247,183,49,0.05);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      border-top: 3px solid var(--vine);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--mist);
+      opacity: 0.65;
+      line-height: 1.9;
+    }
+    footer p + p { margin-top: 0.4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .link-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 0.9rem; }
+      nav ul a { font-size: 0.78rem; }
+      .card { padding: 1.25rem 1.1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Lexicon<span>Garden</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="column.html">Column</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>このサイトについて</h1>
+      <p>Lexicon Garden へようこそ。</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- サイト紹介 -->
+    <p class="section-label">About This Site</p>
+    <div class="card">
+      <p>言語学が好きすぎて作ってしまったファンサイトです。音韻論・形態論・統語論・意味論・語用論……ことばの仕組みを探りながら、日々の勉強記録をつけています。</p>
+      <p>漫画・イラスト・コラム文章も不定期で更新しています。学術的に正確であることより「面白い」を大切にしたいサイトです。</p>
+      <p>サイト名の「Lexicon」は語彙・辞書を意味する言語学用語。「Garden」は、言葉という植物が育つ場所のイメージです。</p>
+    </div>
+
+    <!-- 管理人について -->
+    <p class="section-label">About the Admin</p>
+    <div class="card">
+      <p>漫画家・イラストレーター志望。「Azalea72」の名前で漫画・イラストを描いています。</p>
+      <p>言語学は完全独学の趣味です。好きなジャンルは音韻論と語用論。語源を調べ始めると止まらなくなるタイプです。</p>
+      <p>翻訳の勉強もしています。日本語と英語の間にある「言い換えられない何か」がずっと気になっています。</p>
+    </div>
+
+    <!-- 外部リンク -->
+    <p class="section-label">Links</p>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+        <div class="link-icon">📚</div>
+        <div class="link-text">
+          <span class="link-name">ジャンプルーキー</span>
+          <span class="link-desc">オリジナル漫画を掲載中</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://daysneo.com/author/Sam333333Sam/" target="_blank" rel="noopener">
+        <div class="link-icon">🌙</div>
+        <div class="link-text">
+          <span class="link-name">DaysNEO</span>
+          <span class="link-desc">漫画掲載サイト</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+        <div class="link-icon">🎨</div>
+        <div class="link-text">
+          <span class="link-name">Pixiv</span>
+          <span class="link-desc">二次創作はこちらに掲載</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+        <div class="link-icon">🦋</div>
+        <div class="link-text">
+          <span class="link-name">Bluesky</span>
+          <span class="link-desc">近況・作品のお知らせ</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+        <div class="link-icon">✒️</div>
+        <div class="link-text">
+          <span class="link-name">カクヨム</span>
+          <span class="link-desc">小説を掲載中</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+        <div class="link-icon">🎬</div>
+        <div class="link-text">
+          <span class="link-name">YouTube（リリポピ）</span>
+          <span class="link-desc">動画チャンネル</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+        <div class="link-icon">🌸</div>
+        <div class="link-text">
+          <span class="link-name">Azalea Creative Room</span>
+          <span class="link-desc">メインサイト</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+    </div>
+
+    <!-- お問い合わせ -->
+    <p class="section-label">Contact</p>
+    <div class="card">
+      <p class="form-intro">ご質問・ご感想などはこちらからどうぞ。<br>Gmailで受け取り、返信いたします。</p>
+
+      <div data-fs-success class="form-success" style="display:none;">
+        <span class="form-success-icon">✦</span>
+        <p>メッセージを送信しました。ありがとうございます！</p>
+      </div>
+      <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+      <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+        <div class="form-group">
+          <label class="form-label" for="name">お名前</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="お名前（任意）">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス <span class="required">*</span></label>
+          <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+          <span data-fs-error="email" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">メッセージ <span class="required">*</span></label>
+          <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+          <span data-fs-error="message" class="field-error"></span>
+        </div>
+
+        <button class="form-submit" type="submit" data-fs-submit-btn>
+          📮 送信する
+        </button>
+
+      </form>
+    </div>
+
+    <a class="back-link" href="index.html">← トップページに戻る</a>
+
+  </main>
+
+  <footer>
+    <p>当サイトに掲載されている画像・文章・作品について、AI学習への利用、トレース、無断転載・転載、二次利用を禁止します。</p>
+    <p>Please refrain from using any images, text, or works on this website for AI training, tracing, or unauthorized reproduction.</p>
+    <p style="margin-top:0.6rem;">© 2026 Lexicon Garden. All rights reserved.</p>
+  </footer>
+
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
