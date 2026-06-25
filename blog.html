@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>勉強日誌 | Lexicon Garden</title>
+  <meta name="description" content="言語学の勉強記録。日々の発見や気づきをつづります。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1A3D28;
+      --jungle:  #22573A;
+      --vine:    #2D7A4F;
+      --leaf:    #4CAF72;
+      --mist:    #EFF7EC;
+      --banana:  #F7B731;
+      --orchid:  #E84393;
+      --bark:    #0F2619;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    a { color: var(--banana); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orchid); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bark);
+      border-bottom: 4px solid var(--banana);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--banana);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--orchid); }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--banana); }
+    nav ul a.active { color: var(--banana); border-bottom: 2px solid var(--banana); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--jungle);
+      border-bottom: 5px solid var(--banana);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .page-header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--banana);
+      text-shadow: 2px 3px 0 var(--bark);
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* ── BLOG ENTRIES ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .entry-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 0 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--vine);
+      align-items: baseline;
+    }
+    .entry:first-child { border-top: 1px solid var(--vine); }
+
+    .entry-date {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--banana);
+      letter-spacing: 0.06em;
+      padding-top: 0.1rem;
+      white-space: nowrap;
+    }
+
+    .entry-body {
+      font-size: 0.97rem;
+      color: var(--mist);
+      line-height: 1.75;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      border-top: 3px solid var(--vine);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--mist);
+      opacity: 0.7;
+    }
+    footer p + p { margin-top: 0.4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .entry {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+      nav ul { gap: 0.9rem; }
+      nav ul a { font-size: 0.78rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Lexicon<span>Garden</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="column.html">Column</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>勉強日誌</h1>
+      <p>言語学の勉強記録。日々の発見や気づきをつづります。</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="entry-list">
+
+      <div class="entry">
+        <div class="entry-date">2026.06.23</div>
+        <div class="entry-body">音位転換（メタセシス）について調べた。「ask」が古英語では「acsian」だったと知って驚いた。音が入れ替わるのは英語だけじゃなく、日本語の「あらたし→あたらしい」も同じ現象らしい。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.06.20</div>
+        <div class="entry-body">格文法とフィルモアの深層格についてノートをまとめた。「経験者格」の概念が面白い。「太郎が悲しい」の「太郎」は動作主じゃなくて経験者なんだということがやっと腑に落ちた。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.06.17</div>
+        <div class="entry-body">ソシュールの「シニフィアン／シニフィエ」を復習。記号の恣意性をあらためて考えると奥深い。犬を「dog」と呼ぶ必然性はどこにもないのに、社会的な約束事として成立している不思議さ。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.06.12</div>
+        <div class="entry-body">チョムスキーの普遍文法について読んだ。どの言語にも共通する深層構造があるという考え方、ロマンがあるなと思う。一方で批判も多いので、もう少し反論側の文献も読みたい。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.06.08</div>
+        <div class="entry-body">今日は語用論の日。グライスの協調の原理と4つの格率（量・質・関係・様式）を整理した。「暗示（implicature）」の概念、日常会話で無意識にやってること全部これで説明できてびっくり。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.06.03</div>
+        <div class="entry-body">音韻論の弁別素性を復習。[+voiced]と[-voiced]の違いが日本語話者にとって難しいのは、日本語では有声・無声が弁別的じゃないからなのかも、と気づいた。</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-date">2026.05.28</div>
+        <div class="entry-body">形態論のゼロ形態素について。「fish」の複数形が「fish」のままなのも、ゼロ形態素が付いていると考えると面白い。目に見えない文法要素、好きだな。</div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Lexicon Garden. All rights reserved.</p>
+    <p>このサイトのコンテンツはAIの学習データへの使用を禁止します。無断転載・複製はご遠慮ください。</p>
+  </footer>
+
+</body>
+</html>
