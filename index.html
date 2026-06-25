@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lexicon Garden | 言語学ファンサイト</title>
+  <meta name="description" content="言語学の森へようこそ。Lexicon Gardenは言語学を愛するファンサイトです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1A3D28;
+      --jungle:  #22573A;
+      --vine:    #2D7A4F;
+      --leaf:    #4CAF72;
+      --mist:    #EFF7EC;
+      --banana:  #F7B731;
+      --orchid:  #E84393;
+      --bark:    #0F2619;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--banana); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orchid); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bark);
+      border-bottom: 4px solid var(--banana);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--banana);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--orchid); }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--banana); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--jungle);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      border-bottom: 5px solid var(--banana);
+    }
+
+    /* jungle leaf deco — pure CSS */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 260px;
+      height: 180px;
+      background: var(--vine);
+      border-radius: 0 80% 0 80%;
+      opacity: 0.35;
+    }
+    .hero::before { top: -40px; left: -60px; transform: rotate(-20deg); }
+    .hero::after  { bottom: -40px; right: -60px; transform: rotate(160deg); }
+
+    .leaf-deco {
+      position: absolute;
+      background: var(--leaf);
+      border-radius: 0 70% 0 70%;
+      opacity: 0.18;
+    }
+    .leaf-deco.l1 { width:140px; height:90px; top:20px; right:80px; transform:rotate(40deg); }
+    .leaf-deco.l2 { width:100px; height:65px; bottom:30px; left:120px; transform:rotate(-30deg); }
+    .leaf-deco.l3 { width:80px; height:55px; top:60px; left:30px; transform:rotate(10deg); }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--orchid);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--banana);
+      text-shadow: 3px 4px 0 var(--bark);
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--mist);
+      opacity: 0.85;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--banana);
+      color: var(--bark);
+      box-shadow: 0 4px 0 #a87400;
+    }
+    .btn-primary:hover { box-shadow: 0 6px 0 #a87400; color: var(--bark); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--mist);
+      border: 2px solid var(--mist);
+    }
+    .btn-secondary:hover { border-color: var(--orchid); color: var(--orchid); }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 3.5rem 1.5rem; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--banana);
+      border-left: 5px solid var(--orchid);
+      padding-left: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── BLOG LATEST ── */
+    .blog-section { background: var(--jungle); }
+
+    .blog-list { display: flex; flex-direction: column; gap: 1rem; }
+
+    .blog-card {
+      background: var(--deep);
+      border: 1px solid var(--vine);
+      border-left: 4px solid var(--leaf);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .blog-card:hover { border-left-color: var(--orchid); transform: translateX(4px); }
+
+    .blog-date {
+      font-size: 0.78rem;
+      color: var(--banana);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.35rem;
+    }
+    .blog-text { font-size: 0.95rem; color: var(--mist); opacity: 0.9; }
+
+    .more-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--leaf);
+      letter-spacing: 0.04em;
+    }
+    .more-link::after { content: ' →'; }
+    .more-link:hover { color: var(--orchid); }
+
+    /* ── GALLERY LATEST ── */
+    .gallery-section { background: var(--deep); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      background: var(--vine);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .gallery-item:hover { border-color: var(--banana); transform: scale(1.03); }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* placeholder for when there's no image yet */
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--leaf);
+      opacity: 0.6;
+    }
+    .gallery-placeholder .icon { font-size: 2rem; }
+    .gallery-placeholder .label { font-size: 0.75rem; letter-spacing: 0.06em; }
+
+    /* ── ABOUT TEASER ── */
+    .about-section { background: var(--bark); border-top: 4px solid var(--banana); }
+
+    .about-teaser {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .about-icon {
+      font-size: 3.5rem;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 0 var(--bark));
+    }
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--banana);
+      margin-bottom: 0.5rem;
+    }
+    .about-text p { font-size: 0.95rem; opacity: 0.85; max-width: 560px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      border-top: 3px solid var(--vine);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--mist);
+      opacity: 0.7;
+    }
+    footer a { color: var(--leaf); }
+    footer p + p { margin-top: 0.4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav ul { gap: 0.9rem; }
+      nav ul a { font-size: 0.78rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-logo">Lexicon<span>Garden</span></span>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="column.html">Column</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="leaf-deco l1"></div>
+    <div class="leaf-deco l2"></div>
+    <div class="leaf-deco l3"></div>
+    <div class="hero-badge">言語学ファンサイト</div>
+    <h1>Lexicon Garden</h1>
+    <p class="hero-sub">言語という名の密林へ。語源、音韻、統語論——言葉の生態系を探検しよう。</p>
+    <div class="hero-btns">
+      <a href="blog.html" class="btn btn-primary">勉強日誌を読む</a>
+      <a href="about.html" class="btn btn-secondary">このサイトについて</a>
+    </div>
+  </header>
+
+  <!-- BLOG LATEST -->
+  <section class="blog-section">
+    <div class="section-inner">
+      <h2 class="section-title">最新の勉強日誌</h2>
+      <div class="blog-list">
+        <div class="blog-card">
+          <div class="blog-date">2026.06.23</div>
+          <div class="blog-text">音位転換（メタセシス）について調べた。「ask」が古英語では「acsian」だったと知って驚いた。</div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-date">2026.06.20</div>
+          <div class="blog-text">格文法とフィルモアの深層格についてノートをまとめた。「経験者格」の概念が面白い。</div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-date">2026.06.17</div>
+          <div class="blog-text">ソシュールの「シニフィアン／シニフィエ」を復習。記号の恣意性をあらためて考えると奥深い。</div>
+        </div>
+      </div>
+      <a href="blog.html" class="more-link">勉強日誌をもっと見る</a>
+    </div>
+  </section>
+
+  <!-- GALLERY LATEST -->
+  <section class="gallery-section">
+    <div class="section-inner">
+      <h2 class="section-title">ギャラリー</h2>
+      <div class="gallery-grid">
+        <!-- 画像が入ったら <img src="..." alt="..."> に差し替えてね -->
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="icon">🌿</div>
+            <div class="label">IMAGE</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="icon">🌿</div>
+            <div class="label">IMAGE</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="icon">🌿</div>
+            <div class="label">IMAGE</div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <div class="icon">🌿</div>
+            <div class="label">IMAGE</div>
+          </div>
+        </div>
+      </div>
+      <a href="gallery.html" class="more-link">ギャラリーをもっと見る</a>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="about-section">
+    <div class="section-inner">
+      <div class="about-teaser">
+        <div class="about-icon">🦜</div>
+        <div class="about-text">
+          <h2>Lexicon Gardenについて</h2>
+          <p>言語学が好きすぎて作ってしまったファンサイトです。音韻論、形態論、意味論……ことばの仕組みを探っています。イラストやコラムもちょこちょこ更新中。</p>
+          <a href="about.html" class="more-link" style="margin-top:0.75rem;">詳しく見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Lexicon Garden. All rights reserved.</p>
+    <p>このサイトのコンテンツはAIの学習データへの使用を禁止します。無断転載・複製はご遠慮ください。</p>
+  </footer>
+
+</body>
+</html>
