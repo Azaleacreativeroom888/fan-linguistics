@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コラム | Lexicon Garden</title>
+  <meta name="description" content="言語学にまつわる漫画・イラスト・コラム文章。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1A3D28;
+      --jungle:  #22573A;
+      --vine:    #2D7A4F;
+      --leaf:    #4CAF72;
+      --mist:    #EFF7EC;
+      --banana:  #F7B731;
+      --orchid:  #E84393;
+      --bark:    #0F2619;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--banana); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orchid); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bark);
+      border-bottom: 4px solid var(--banana);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--banana);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--orchid); }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--banana); }
+    nav ul a.active { color: var(--banana); border-bottom: 2px solid var(--banana); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--jungle);
+      border-bottom: 5px solid var(--banana);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .page-header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--banana);
+      text-shadow: 2px 3px 0 var(--bark);
+      margin-bottom: 0.5rem;
+    }
+    .page-header p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    /* ── GRID ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--jungle);
+      border: 2px solid var(--vine);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: var(--banana);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
+    /* サムネエリア */
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: var(--vine);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 画像なしプレースホルダー */
+    .card-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      color: var(--leaf);
+      opacity: 0.55;
+    }
+    .card-thumb-placeholder .ph-icon { font-size: 2.2rem; }
+    .card-thumb-placeholder .ph-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* 種別バッジ */
+    .card-badge {
+      position: absolute;
+      top: 0.6rem;
+      left: 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      line-height: 1.4;
+    }
+    .badge-manga   { background: var(--orchid); color: #fff; }
+    .badge-illust  { background: var(--leaf);   color: var(--bark); }
+    .badge-column  { background: var(--banana); color: var(--bark); }
+
+    /* カード本文 */
+    .card-body {
+      padding: 1rem 1.1rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-date {
+      font-size: 0.75rem;
+      color: var(--banana);
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.35rem;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--mist);
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+    }
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--mist);
+      opacity: 0.75;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--leaf);
+      letter-spacing: 0.04em;
+    }
+    .card-link::after { content: ' →'; }
+    .card-link:hover { color: var(--orchid); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      border-top: 3px solid var(--vine);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--mist);
+      opacity: 0.7;
+    }
+    footer p + p { margin-top: 0.4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .card-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 0.9rem; }
+      nav ul a { font-size: 0.78rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Lexicon<span>Garden</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="column.html" class="active">Column</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>コラム</h1>
+      <p>言語学にまつわる漫画・イラスト・コラム文章をまとめています。</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="card-grid">
+
+      <!-- カード1：漫画 -->
+      <div class="card">
+        <div class="card-thumb">
+          <!-- 画像があれば <img src="..." alt="..."> に差し替えてね -->
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">📖</div>
+            <div class="ph-label">manga</div>
+          </div>
+          <span class="card-badge badge-manga">漫画</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.06.20</div>
+          <div class="card-title">ソシュールが喫茶店にいたら</div>
+          <div class="card-desc">シニフィアンとシニフィエについて友人に説明しようとしたら全然伝わらなかった話を漫画にしました。</div>
+          <a href="#" class="card-link">読む</a>
+        </div>
+      </div>
+
+      <!-- カード2：コラム -->
+      <div class="card">
+        <div class="card-thumb">
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">🌿</div>
+            <div class="ph-label">column</div>
+          </div>
+          <span class="card-badge badge-column">コラム</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.06.14</div>
+          <div class="card-title">「ら抜き言葉」はなぜ広まったのか</div>
+          <div class="card-desc">「食べれる」「見れる」——批判されがちなら抜き言葉だけど、実は整合性のある変化だという話。</div>
+          <a href="#" class="card-link">読む</a>
+        </div>
+      </div>
+
+      <!-- カード3：イラスト -->
+      <div class="card">
+        <div class="card-thumb">
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">🎨</div>
+            <div class="ph-label">illust</div>
+          </div>
+          <span class="card-badge badge-illust">イラスト</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.06.09</div>
+          <div class="card-title">音韻論の弁別素性マップ</div>
+          <div class="card-desc">子音の調音点・調音法・有声性をまとめたイラスト図解。勉強ノートから清書しました。</div>
+          <a href="#" class="card-link">見る</a>
+        </div>
+      </div>
+
+      <!-- カード4：漫画 -->
+      <div class="card">
+        <div class="card-thumb">
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">📖</div>
+            <div class="ph-label">manga</div>
+          </div>
+          <span class="card-badge badge-manga">漫画</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.05.30</div>
+          <div class="card-title">グライスの格率、破ってみた</div>
+          <div class="card-desc">協調の原理の「量の格率」を意図的に破るとどうなるか実験した日常漫画4コマです。</div>
+          <a href="#" class="card-link">読む</a>
+        </div>
+      </div>
+
+      <!-- カード5：コラム -->
+      <div class="card">
+        <div class="card-thumb">
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">🌿</div>
+            <div class="ph-label">column</div>
+          </div>
+          <span class="card-badge badge-column">コラム</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.05.22</div>
+          <div class="card-title">世界の言語に共通する「ママ」と「パパ」</div>
+          <div class="card-desc">なぜこんなにも多くの言語で両親の呼び名が似ているのか。音声習得の観点から考えてみました。</div>
+          <a href="#" class="card-link">読む</a>
+        </div>
+      </div>
+
+      <!-- カード6：イラスト -->
+      <div class="card">
+        <div class="card-thumb">
+          <div class="card-thumb-placeholder">
+            <div class="ph-icon">🎨</div>
+            <div class="ph-label">illust</div>
+          </div>
+          <span class="card-badge badge-illust">イラスト</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">2026.05.15</div>
+          <div class="card-title">語族の樹形図</div>
+          <div class="card-desc">印欧語族を中心に、主要な語族をざっくり樹形図にしたイラストです。眺めるだけで楽しい。</div>
+          <a href="#" class="card-link">見る</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 Lexicon Garden. All rights reserved.</p>
+    <p>このサイトのコンテンツはAIの学習データへの使用を禁止します。無断転載・複製はご遠慮ください。</p>
+  </footer>
+
+</body>
+</html>
