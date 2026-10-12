@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奄美弁辞書 | Lexicon Garden</title>
+  <meta name="description" content="奄美弁（奄美大島の方言）の語彙をまとめた小辞典。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:    #1A3D28;
+      --jungle:  #22573A;
+      --vine:    #2D7A4F;
+      --leaf:    #4CAF72;
+      --mist:    #EFF7EC;
+      --banana:  #F7B731;
+      --orchid:  #E84393;
+      --bark:    #0F2619;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--mist);
+      font-family: 'Nunito', 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--banana); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--orchid); }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--bark);
+      border-bottom: 4px solid var(--banana);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--banana);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo span { color: var(--orchid); }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; }
+    nav ul a {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--mist);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: var(--banana); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--jungle);
+      border-bottom: 5px solid var(--banana);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .page-header-inner { max-width: 960px; margin: 0 auto; }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--banana);
+      text-shadow: 2px 3px 0 var(--bark);
+      margin-bottom: 0.5rem;
+    }
+    .page-header p { font-size: 0.95rem; opacity: 0.8; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .dict-intro {
+      background: linear-gradient(135deg, rgba(34,87,58,0.55), rgba(15,38,25,0.45));
+      border: 1px solid rgba(247,183,49,0.22);
+      border-left: 4px solid var(--orchid);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.92rem;
+      opacity: 0.88;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    /* ── 辞書グリッド ── */
+    .dict-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .dict-card {
+      background: linear-gradient(135deg, rgba(34,87,58,0.55), rgba(15,38,25,0.45));
+      border: 1px solid rgba(232,67,147,0.18);
+      border-radius: 4px;
+      padding: 0.9rem 1rem;
+      position: relative;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .dict-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--orchid), transparent);
+      border-radius: 4px 0 0 4px;
+    }
+    .dict-card:hover {
+      border-color: rgba(232,67,147,0.5);
+      transform: translateY(-2px);
+    }
+
+    .dict-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--orchid);
+      margin-bottom: 0.3rem;
+    }
+    .dict-meaning {
+      font-size: 0.85rem;
+      color: var(--mist);
+      opacity: 0.85;
+      line-height: 1.55;
+    }
+
+    /* ── BACK ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--leaf);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 2.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(247,183,49,0.2);
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
+    .back-link:hover {
+      color: var(--banana);
+      border-color: rgba(247,183,49,0.5);
+      background: rgba(247,183,49,0.05);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bark);
+      border-top: 3px solid var(--vine);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--mist);
+      opacity: 0.7;
+    }
+    footer p + p { margin-top: 0.4rem; }
+
+    @media (max-width: 560px) {
+      .dict-grid { grid-template-columns: repeat(2, 1fr); }
+      nav ul { gap: 0.9rem; }
+      nav ul a { font-size: 0.78rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Lexicon<span>Garden</span></a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="column.html">Column</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>🌊 奄美弁辞書</h1>
+      <p>奄美大島の言葉をまとめた小辞典。</p>
+    </div>
+  </div>
+
+  <main>
+    <div class="dict-intro">
+      奄美方言は鹿児島県奄美大島を中心に話される方言。琉球諸語に近い特徴を持ちながら、薩摩藩の支配の影響も受けた独自の言語体系。2019年にユネスコが「危機言語」に指定している。
+    </div>
+
+    <div class="dict-grid">
+
+      <div class="dict-card">
+        <div class="dict-word">うとぅ</div>
+        <div class="dict-meaning">音・声</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">しまうた</div>
+        <div class="dict-meaning">島の歌・奄美の民謡</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">なりむん</div>
+        <div class="dict-meaning">果物・実がなるもの</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">うぬ</div>
+        <div class="dict-meaning">あなた・お前（二人称）</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">わん</div>
+        <div class="dict-meaning">私・俺（一人称）</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">まし</div>
+        <div class="dict-meaning">良い・まし・ましな</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">ちゅら</div>
+        <div class="dict-meaning">美しい・きれい</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">かなし</div>
+        <div class="dict-meaning">愛おしい・かわいい（琉球語由来）</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">いぇ〜</div>
+        <div class="dict-meaning">そうだ・うん（肯定の相槌）</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">あらん</div>
+        <div class="dict-meaning">違う・そうではない</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">やっちゃ</div>
+        <div class="dict-meaning">兄・兄さん</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">あんが</div>
+        <div class="dict-meaning">姉・姉さん</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">ふさ</div>
+        <div class="dict-meaning">欲しい・したい</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">ぬちゃ</div>
+        <div class="dict-meaning">寝た・眠った</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">ゆんぬ</div>
+        <div class="dict-meaning">夜・夜間</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">てぃだ</div>
+        <div class="dict-meaning">太陽・日光</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">むる</div>
+        <div class="dict-meaning">全部・みんな・すべて</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">ありがてさまりょうた</div>
+        <div class="dict-meaning">ありがとうございました</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">にきてぃ</div>
+        <div class="dict-meaning">来て・こちらへ来なさい</div>
+      </div>
+
+      <div class="dict-card">
+        <div class="dict-word">うっぱまぬかみ</div>
+        <div class="dict-meaning">海の神・海神（信仰用語）</div>
+      </div>
+
+    </div>
+
+    <a href="column.html" class="back-link">← コラムに戻る</a>
+  </main>
+
+  <footer>
+    <p>© 2026 Lexicon Garden. All rights reserved.</p>
+    <p>このサイトのコンテンツはAIの学習データへの使用を禁止します。無断転載・複製はご遠慮ください。</p>
+  </footer>
+
+</body>
+</html>
