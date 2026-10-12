@@ -221,6 +221,70 @@
     .card-link::after { content: ' →'; }
     .card-link:hover { color: var(--orchid); }
 
+    /* ── DIALECT SECTION ── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--banana);
+      border-left: 4px solid var(--orchid);
+      padding-left: 0.7rem;
+      margin: 3rem 0 1.25rem;
+    }
+
+    .dialect-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .dialect-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, rgba(34,87,58,0.6), rgba(15,38,25,0.5));
+      border: 1px solid rgba(247,183,49,0.22);
+      border-left: 4px solid var(--banana);
+      border-radius: 4px;
+      padding: 1.1rem 1.25rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .dialect-link:hover {
+      border-color: var(--orchid);
+      border-left-color: var(--orchid);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .dialect-icon {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+    .dialect-text { flex: 1; }
+    .dialect-name {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--banana);
+      margin-bottom: 0.2rem;
+    }
+    .dialect-link:hover .dialect-name { color: var(--orchid); }
+    .dialect-desc {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--leaf);
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+    .dialect-arrow {
+      font-size: 1.1rem;
+      color: rgba(247,183,49,0.4);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .dialect-link:hover .dialect-arrow { color: var(--orchid); transform: translateX(3px); }
+
     /* ── FOOTER ── */
     footer {
       background: var(--bark);
@@ -254,6 +318,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="column.html" class="active">Column</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
     </div>
@@ -373,6 +438,31 @@
       </div>
 
     </div>
+
+    <!-- 方言辞書セクション -->
+    <h2 class="section-title">🗣️ 方言辞書</h2>
+    <div class="dialect-grid">
+
+      <a href="report1.html" class="dialect-link">
+        <span class="dialect-icon">🌋</span>
+        <span class="dialect-text">
+          <span class="dialect-name">薩摩弁辞書</span>
+          <span class="dialect-desc">鹿児島の言葉をまとめた小辞典。薩摩弁の独特な語彙を収録。</span>
+        </span>
+        <span class="dialect-arrow">›</span>
+      </a>
+
+      <a href="report2.html" class="dialect-link">
+        <span class="dialect-icon">🌊</span>
+        <span class="dialect-text">
+          <span class="dialect-name">奄美弁辞書</span>
+          <span class="dialect-desc">奄美大島の言葉をまとめた小辞典。島ことばの豊かな表現を収録。</span>
+        </span>
+        <span class="dialect-arrow">›</span>
+      </a>
+
+    </div>
+
   </main>
 
   <footer>
